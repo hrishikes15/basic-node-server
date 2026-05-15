@@ -1,0 +1,21 @@
+
+const http = require("http")
+const fs = require("fs")
+
+const myServer = http.createServer((req,res) => {
+    const log = `${Date.now()} : ${req.url} \n`;
+    fs.appendFile("log.txt" , log , (err , data) => {
+        switch(req.url){
+            case  "/":
+                res.end("homepage");
+                break;
+            case "/about":
+                res.end("I am Hrishi");
+                break;
+            default :
+                res.end("Error 404")
+        };
+    });
+})
+
+myServer.listen(1506, () => console.log("server started succesfully"))
